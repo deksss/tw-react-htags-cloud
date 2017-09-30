@@ -4,6 +4,8 @@ import AutoComplete from 'material-ui/AutoComplete';
 const style = {
   border: '2px solid black',
   marginBottom: 10,
+  paddingLeft: 10,
+  paddingRight: 10,
 }
 
 class SearchInput extends Component {
