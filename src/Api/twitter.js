@@ -165,3 +165,20 @@ export const test = () => {
   });
   */
 }
+
+/*
+a = temp1.statuses.reduce((resultTags, next) => {
+    if (next.entities.hashtags.length > 0) {
+        const uniqFiltredTags = next.entities.hashtags.reduce((tags, htag) => {
+            const text = htag.text.toLowerCase();
+            if (text.search('react') === 0 && !resultTags.includes(text)) {
+                return [...tags, ...[htag.text]]
+            } else {
+               return tags;
+            }
+        }, [])
+        return [...resultTags, ...uniqFiltredTags];
+    }
+    return resultTags;
+}, [])
+*/

@@ -29,7 +29,7 @@ class TagsCloud extends Component {
         alignItems: 'flex-start',
         alignContent: 'flex-start',
         border: '2px solid black',
-        minHeight: 400,
+        minHeight: 300,
         padding: 10
       },
     };
