@@ -7,7 +7,6 @@ import Chip from 'material-ui/Chip';
  * while clicked or touched.
  */
 class TagsCloud extends Component {
-
   constructor(props) {
     super(props);
     this.state = {chipData: [
@@ -55,9 +54,11 @@ class TagsCloud extends Component {
   }
 
   render() {
+    const {hashtags} = this.props;
+    console.log(this.props)
     return (
       <div style={this.styles.wrapper}>
-        {this.state.chipData.map(this.renderHashtag, this)}
+        {hashtags.map(this.renderHashtag, this)}
       </div>
     );
   }

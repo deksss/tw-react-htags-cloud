@@ -22,32 +22,33 @@ const style = {
 };
 
 class App extends Component {
-  /*
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
-      queryResults: []
+      hashtags: []
     };
   }
 
-  handleUpdateInput = (value) => {
+  addHashtagHandler = (value) => {
+    console.log(value)
+    const hashtags = this.state.hashtags;
+    const isNotAlreadyAdded = !hashtags.find( htag => htag.label === value);
+    if (isNotAlreadyAdded) {
     this.setState({
-      dataSource: [
-        value,
-        value + value,
-        value + value + value,
-      ],
-    });
+        hashtags: [
+          ...hashtags,
+          ...[{key: hashtags.length + 1, label: value}]]
+      });
+    }
   };
-  */
+
   render() {
     return (
       <MuiThemeProvider>
         <div style={style.wrapper}>
           <div style={style.container}>
-            <SearchInput value="test"/>
-            <TagsCloud />
+            <SearchInput value="" addHashtag={this.addHashtagHandler}/>
+            <TagsCloud hashtags={this.state.hashtags} />
             <SaveButton />
           </div>
         </div>

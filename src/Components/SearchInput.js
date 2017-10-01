@@ -16,18 +16,6 @@ class SearchInput extends Component {
   };
 
   handleUpdateInput = (value) => {
-    /*
-    sereachTweets(value).then((resolve, reject) => {
-      console.log(reject);
-      console.log(resolve);
-      const htags = getUniqHtags(resolve, value);
-      console.log(htags);
-      this.setState({
-        dataSource: htags,
-      });
-    }
-   );
-   */
     if (value && value !== this.state.value) {
       sereachTweets(value).then((resolve, reject) => {
         this.setState({
@@ -36,7 +24,11 @@ class SearchInput extends Component {
         });
       })
     }
+  };
 
+  handleNewRequest = (input) => {
+    this.setState({value: input});
+    this.props.addHashtag(input);
   };
 
   render() {
@@ -47,7 +39,7 @@ class SearchInput extends Component {
           dataSource={this.state.dataSource}
           onUpdateInput={this.handleUpdateInput}
           fullWidth={true}
-          onNewRequest={e => this.setState({value: e}) }
+          onNewRequest={this.handleNewRequest}
         />
       </div>
     );
