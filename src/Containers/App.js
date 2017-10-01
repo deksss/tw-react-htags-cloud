@@ -3,8 +3,8 @@ import TagsCloud from '../Components/TagsCloud';
 import SearchInput from '../Components/SearchInput';
 import SaveButton from '../Components/SaveButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-//import {sereachTweets} from "../Api/twitter";
 import {updateDataInStorage, getDataFromStorage} from "../Api/storage";
+import {sereachTweets} from "../Api/twitter";
 
 const style = {
   wrapper: {
@@ -25,7 +25,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hashtags: []
+      hashtags: [],
+      searchDataSource: []
     };
   }
 
@@ -68,6 +69,17 @@ class App extends Component {
     //error handling
   };
 
+sereachTweets = (value) => {
+  if (value) {
+    sereachTweets(value).then((resolve, reject) => {
+      this.setState({
+        searchDataSource: resolve,
+      });
+      //error handling
+    })
+  }
+}
+
   render() {
     return (
       <MuiThemeProvider>
@@ -75,6 +87,8 @@ class App extends Component {
           <div style={style.container}>
             <SearchInput value=""
             addHashtag={this.addHashtagHandler}
+            searchDataSource={this.state.searchDataSource}
+            sereachTweets={this.sereachTweets}
             />
             <TagsCloud hashtags={this.state.hashtags}
                        deleteHashtag={this.handleRequestDelete}

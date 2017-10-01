@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
-import {sereachTweets} from "../Api/twitter";
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
 const style = {
@@ -15,22 +14,14 @@ const style = {
 
 class SearchInput extends Component {
   state = {
-    dataSource: [],
     value: ''
   };
 
   handleUpdateInput = (value) => {
-    const oldValue = this.state.value;
     this.setState({
       value: value
     });
-    if (value && value !== oldValue) {
-      sereachTweets(value).then((resolve, reject) => {
-        this.setState({
-          dataSource: resolve,
-        });
-      })
-    }
+    this.props.sereachTweets(value);
   };
 
   handleNewRequest = (input) => {
@@ -39,11 +30,12 @@ class SearchInput extends Component {
   };
 
   render() {
+    const {searchDataSource} = this.props;
     return (
       <div style={style}>
         <AutoComplete
           hintText="Hashtag"
-          dataSource={this.state.dataSource}
+          dataSource={searchDataSource}
           onUpdateInput={this.handleUpdateInput}
           fullWidth={true}
           searchText={this.state.value}
