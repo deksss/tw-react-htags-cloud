@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Chip from 'material-ui/Chip';
+import PropTypes from 'prop-types';
 
 const styles = {
   chip: {
@@ -22,6 +23,11 @@ const styles = {
 };
 
 class TagsCloud extends Component {
+  static propTypes = {
+    hashtags: PropTypes.array.isRequired,
+    deleteHashtag: PropTypes.func.isRequired,
+  }
+
   renderHashtag(data) {
     return (
       <Chip
