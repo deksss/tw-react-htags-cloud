@@ -12,7 +12,8 @@ const KEY = 'name';
 const VALUE = 'hashtags-from-app';
 
 export const pushDataToStorage = (data) => {
-const objectsForPush = {hashtags: data, name: VALUE};
+  const objectsForPush = {hashtags: data, name: VALUE};
+  localStorage.setItem('hashtags', JSON.stringify(data));
   storageService.insertJSONDocument(dbName, collectionName, objectsForPush, {
       success: (object) =>
       {
@@ -25,7 +26,8 @@ const objectsForPush = {hashtags: data, name: VALUE};
 }
 
 export const updateDataInStorage = (data) => {
-const objectsForPush = {hashtags: data, name: VALUE};
+  const objectsForPush = {hashtags: data, name: VALUE};
+  localStorage.setItem('hashtags', JSON.stringify(data));
 
   storageService.updateDocumentByKeyValue(dbName, collectionName, KEY, VALUE, objectsForPush, {
       success: (object) =>
@@ -50,8 +52,9 @@ export const getDataFromStorage = () => {
             resolve(hashtags);
           },
           error: function(error) {
-            pushDataToStorage([]);
-            reject(error);
+            const localData = JSON.parse(localStorage.getItem('hashtags'));
+            pushDataToStorage(localData || []);
+            resolve(localData);
           }
       });
     });
