@@ -37,7 +37,7 @@ export const updateDataInStorage = (data) => {
         {
           resolve('Data updated in cloud');
         },
-        error: function(error) {
+        error: error => {
           //errror handel
           reject(`Problems with App42': ${error}`);
         }
@@ -48,13 +48,13 @@ export const updateDataInStorage = (data) => {
 export const getDataFromStorage = () => {
     return new Promise((resolve, reject) => {
        storageService.findDocumentByKeyValue(dbName,collectionName,KEY,VALUE,  {
-          success: function(object)
+          success: object =>
           {
             const data = JSON.parse(object);
             const hashtags = data.app42.response.storage.jsonDoc[0].hashtags;
             resolve(hashtags);
           },
-          error: function(error) {
+          error: error => {
             const localData = JSON.parse(localStorage.getItem('hashtags'));
             //pushDataToStorage(localData || []);
             resolve(localData);
