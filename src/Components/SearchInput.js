@@ -7,6 +7,7 @@ const style = {
   marginBottom: 10,
   paddingLeft: 10,
   paddingRight: 10,
+  color: 'black',
 }
 
 class SearchInput extends Component {
@@ -16,18 +17,21 @@ class SearchInput extends Component {
   };
 
   handleUpdateInput = (value) => {
-    if (value && value !== this.state.value) {
+    const oldValue = this.state.value;
+    this.setState({
+      value: value
+    });
+    if (value && value !== oldValue) {
       sereachTweets(value).then((resolve, reject) => {
         this.setState({
           dataSource: resolve,
-          value: value
         });
       })
     }
   };
 
   handleNewRequest = (input) => {
-    this.setState({value: input});
+    this.setState({value: ''});
     this.props.addHashtag(input);
   };
 
@@ -39,6 +43,7 @@ class SearchInput extends Component {
           dataSource={this.state.dataSource}
           onUpdateInput={this.handleUpdateInput}
           fullWidth={true}
+          searchText={this.state.value}
           onNewRequest={this.handleNewRequest}
         />
       </div>

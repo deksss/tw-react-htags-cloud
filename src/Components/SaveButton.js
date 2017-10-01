@@ -15,7 +15,7 @@ class SaveButton extends Component {
       <FlatButton
         style={style}
         label="Save"
-        labelPosition="before"
+        labelPosition="after"
         icon={<Save />}
         onClick={this.props.saveTags}
       />
