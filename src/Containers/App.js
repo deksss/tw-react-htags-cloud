@@ -42,13 +42,24 @@ class App extends Component {
     }
   };
 
+  handleRequestDelete = (key) => {
+    const hashtags = this.state.hashtags;
+    const tagToDelete = hashtags.map(tag => tag.key).indexOf(key);
+    hashtags.splice(tagToDelete, 1);
+    this.setState({hashtags: hashtags});
+  };
+
   render() {
     return (
       <MuiThemeProvider>
         <div style={style.wrapper}>
           <div style={style.container}>
-            <SearchInput value="" addHashtag={this.addHashtagHandler}/>
-            <TagsCloud hashtags={this.state.hashtags} />
+            <SearchInput value=""
+            addHashtag={this.addHashtagHandler}
+            />
+            <TagsCloud hashtags={this.state.hashtags}
+                       deleteHashtag={this.handleRequestDelete}
+            />
             <SaveButton />
           </div>
         </div>

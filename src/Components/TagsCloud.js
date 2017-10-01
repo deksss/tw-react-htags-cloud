@@ -34,18 +34,13 @@ class TagsCloud extends Component {
     };
   }
 
-  handleRequestDelete = (key) => {
-    this.chipData = this.state.chipData;
-    const chipToDelete = this.chipData.map((chip) => chip.key).indexOf(key);
-    this.chipData.splice(chipToDelete, 1);
-    this.setState({chipData: this.chipData});
-  };
+
 
   renderHashtag(data) {
     return (
       <Chip
         key={data.key}
-        onRequestDelete={() => this.handleRequestDelete(data.key)}
+        onRequestDelete={() => this.props.deleteHashtag(data.key)}
         style={this.styles.chip}
       >
         {data.label}
