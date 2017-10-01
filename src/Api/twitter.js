@@ -25,7 +25,7 @@ const pushToCashe = (query, tagsArr) => sereachCashe[query] =
 const getFromCashe = (query) => {
   const cashed = sereachCashe[query];
   const isValid = cashed && (new Date() - cashed.date) < invalidateCasheTime;
-  if (isValid) {
+  if (isValid && cashed.tags.length > 0) {
     return cashed.tags;
   }
   return false
@@ -33,6 +33,7 @@ const getFromCashe = (query) => {
 
 
 export const getUniqHtags = (twitts, rawQueryString) => {
+  console.log(twitts)
   const query = rawQueryString.toLowerCase();
   return twitts.statuses.reduce(
     (resultTags, next) => {
@@ -62,7 +63,7 @@ export const sereachTweets = query => {
        resolve(resultFromCash);
      } else {
        console.log('try to get htags from api');
-       tw.get(url, {q: query})
+       tw.get(url, {q: `%23${query}`, include_entities: true})
         .then((rs, rj) => {
           if (rs) {
             const htags = getUniqHtags(rs, query);
