@@ -61,6 +61,13 @@ class App extends Component {
     this.setState({hashtags: hashtags});
   };
 
+  saveDataToStore = () => {
+    const hashtags = this.state.hashtags;
+    console.log(hashtags)
+    updateDataInStorage(hashtags);
+    //error handling
+  };
+
   render() {
     return (
       <MuiThemeProvider>
@@ -72,7 +79,7 @@ class App extends Component {
             <TagsCloud hashtags={this.state.hashtags}
                        deleteHashtag={this.handleRequestDelete}
             />
-            <SaveButton />
+            <SaveButton saveTags={this.saveDataToStore} />
           </div>
         </div>
       </MuiThemeProvider>

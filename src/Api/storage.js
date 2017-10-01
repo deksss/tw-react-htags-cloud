@@ -16,7 +16,7 @@ const objectsForPush = {hashtags: data, name: VALUE};
   storageService.insertJSONDocument(dbName, collectionName, objectsForPush, {
       success: (object) =>
       {
-        //console.log(object)
+        console.log(object)
       },
       error: function(error) {
         console.log(error);
@@ -30,7 +30,7 @@ const objectsForPush = {hashtags: data, name: VALUE};
   storageService.updateDocumentByKeyValue(dbName, collectionName, KEY, VALUE, objectsForPush, {
       success: (object) =>
       {
-        //console.log(object)
+        console.log(object)
       },
       error: function(error) {
         console.log(error);

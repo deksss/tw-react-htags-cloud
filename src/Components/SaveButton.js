@@ -17,6 +17,7 @@ class SaveButton extends Component {
         label="Save"
         labelPosition="before"
         icon={<Save />}
+        onClick={this.props.saveTags}
       />
     );
   }
