@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Containers/App';
 import registerServiceWorker from './registerServiceWorker';
-import {test} from "./Api/twitter";
-import {updateDataInStorage, getDataFromStorage} from "./Api/storage";
+//import {sereachTweets} from "./Api/twitter";
+//import {updateDataInStorage, getDataFromStorage} from "./Api/storage";
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
-test();
+/*
+sereachTweets('Angular');
 
 getDataFromStorage()
     .then((r, e) => {
@@ -18,3 +19,4 @@ getDataFromStorage()
     .catch(e => console.log(e));
 
 updateDataInStorage([{key: 1, name: 'React' + ~~(Math.random()*10)}, {key: 2, name: 'Redux'}]);
+*/

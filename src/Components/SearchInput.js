@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
+import {sereachTweets, getUniqHtags} from "../Api/twitter";
 
 const style = {
   border: '2px solid black',
@@ -11,17 +12,19 @@ const style = {
 class SearchInput extends Component {
   state = {
     dataSource: [],
-
   };
 
   handleUpdateInput = (value) => {
-    this.setState({
-      dataSource: [
-        value,
-        value + value,
-        value + value + value,
-      ],
-    });
+    sereachTweets(value).then((resolve, reject) => {
+      console.log(reject);
+      console.log(resolve);
+      const htags = getUniqHtags(resolve, value);
+      console.log(htags);
+      this.setState({
+        dataSource: htags,
+      });
+    }
+   );
   };
 
   render() {

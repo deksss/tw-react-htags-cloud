@@ -3,6 +3,8 @@ import TagsCloud from '../Components/TagsCloud';
 import SearchInput from '../Components/SearchInput';
 import SaveButton from '../Components/SaveButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//import {sereachTweets, getUniqHtags} from "../Api/twitter";
+//import {updateDataInStorage, getDataFromStorage} from "./Api/storage";
 
 const style = {
   wrapper: {
@@ -20,6 +22,25 @@ const style = {
 };
 
 class App extends Component {
+  /*
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: '',
+      queryResults: []
+    };
+  }
+
+  handleUpdateInput = (value) => {
+    this.setState({
+      dataSource: [
+        value,
+        value + value,
+        value + value + value,
+      ],
+    });
+  };
+  */
   render() {
     return (
       <MuiThemeProvider>
