@@ -1,6 +1,6 @@
-import React from 'react';
-import Snackbar from 'material-ui/Snackbar';
-import PropTypes from 'prop-types';
+import React from "react";
+import Snackbar from "material-ui/Snackbar";
+import PropTypes from "prop-types";
 
 class Msg extends React.Component {
   constructor(props) {
@@ -13,9 +13,8 @@ class Msg extends React.Component {
   static propTypes = {
     open: PropTypes.bool.isRequired,
     message: PropTypes.string.isRequired,
-    hide: PropTypes.func.isRequired,
-  }
-
+    hide: PropTypes.func.isRequired
+  };
 
   render() {
     return (
