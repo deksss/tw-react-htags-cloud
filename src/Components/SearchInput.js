@@ -10,7 +10,8 @@ const style = {
   paddingRight: 10,
   color: 'black',
   display: 'flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  height: 40
 }
 
 class SearchInput extends Component {

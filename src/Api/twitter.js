@@ -57,12 +57,9 @@ export const sereachTweets = query => {
 
    return new Promise((resolve, reject) => {
      const resultFromCash = getFromCashe(query);
-
      if (resultFromCash) {
-       console.log('gettted from cash');
        resolve(resultFromCash);
      } else {
-       console.log('try to get htags from api');
        tw.get(url, {q: `%23${query}`, include_entities: true})
         .then((rs, rj) => {
           if (rs) {

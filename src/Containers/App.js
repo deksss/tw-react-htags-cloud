@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TagsCloud from '../Components/TagsCloud';
 import SearchInput from '../Components/SearchInput';
 import SaveButton from '../Components/SaveButton';
+import Msg from '../Components/Msg';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {updateDataInStorage, getDataFromStorage} from "../Api/storage";
 import {sereachTweets} from "../Api/twitter";
@@ -26,24 +27,27 @@ class App extends Component {
     super(props);
     this.state = {
       hashtags: [],
-      searchDataSource: []
+      searchDataSource: [],
+      showMsg: false,
+      msgText: '',
     };
   }
 
   componentDidMount() {
     getDataFromStorage()
         .then((result, reject) => {
-          console.log(result);
-          console.log(reject);
           if (result) {
             this.setState({ hashtags:  result});
           }
+          if (reject) {
+            this.setState({ showMsg:  true, msgText: reject});
+          }
         })
-        .catch(e => console.log(e));
+        .catch(e => this.setState({ showMsg:  true, msgText: `Problems with App42': ${e}`}));
   }
 
   addHashtagHandler = (value) => {
-    console.log(value)
+
     const hashtags = this.state.hashtags;
     const isNotAlreadyAdded = !hashtags.find( htag => htag.label === value);
     if (isNotAlreadyAdded) {
@@ -65,20 +69,33 @@ class App extends Component {
   saveDataToStore = () => {
     const hashtags = this.state.hashtags;
     console.log(hashtags)
-    updateDataInStorage(hashtags);
-    //error handling
+    updateDataInStorage(hashtags).then((result, reject) => {
+      if (result) {
+        this.setState({ showMsg:  true, msgText: 'Data updated in Cloud'});
+      }
+      if (reject) {
+        this.setState({ showMsg:  true, msgText: reject});
+      }
+    })
+    .catch(e => this.setState({ showMsg:  true, msgText: `Problems with App42': ${e}`}));
   };
 
 sereachTweets = (value) => {
   if (value) {
     sereachTweets(value).then((resolve, reject) => {
-      this.setState({
-        searchDataSource: resolve,
-      });
-      //error handling
+      if (resolve) {
+        this.setState({
+          searchDataSource: resolve,
+        });
+      } else {
+          this.setState({ showMsg:  true, msgText: reject});
+      }
     })
+    .catch(e => this.setState({ showMsg:  true, msgText: `Problems in twitter API: ${e}`}));
   }
 }
+
+
 
   render() {
     return (
@@ -95,6 +112,10 @@ sereachTweets = (value) => {
             />
             <SaveButton saveTags={this.saveDataToStore} />
           </div>
+          <Msg message={this.state.msgText}
+               open={this.state.showMsg}
+               hide={() => this.setState({ showMsg:  false, msgText: ''})}
+          />
         </div>
       </MuiThemeProvider>
     );

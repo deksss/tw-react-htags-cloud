@@ -7,4 +7,4 @@ node.js 6+
 
 ## For start:
 npm install
-npm run dev
+npm start

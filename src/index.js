@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Containers/App';
 import registerServiceWorker from './registerServiceWorker';
-//import {sereachTweets} from "./Api/twitter";
 //import {updateDataInStorage, getDataFromStorage} from "./Api/storage";
+import {startApp42} from "./Api/storage";
+startApp42();
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
 /*
-sereachTweets('Angular');
 
 getDataFromStorage()
     .then((r, e) => {

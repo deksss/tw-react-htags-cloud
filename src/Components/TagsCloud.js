@@ -42,7 +42,6 @@ class TagsCloud extends Component {
 
   render() {
     const {hashtags} = this.props;
-    console.log(this.props)
     return (
       <div style={styles.wrapper}>
         {hashtags.map(this.renderHashtag, this)}
