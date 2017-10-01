@@ -3,8 +3,8 @@ import TagsCloud from '../Components/TagsCloud';
 import SearchInput from '../Components/SearchInput';
 import SaveButton from '../Components/SaveButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-//import {sereachTweets, getUniqHtags} from "../Api/twitter";
-//import {updateDataInStorage, getDataFromStorage} from "./Api/storage";
+//import {sereachTweets} from "../Api/twitter";
+import {updateDataInStorage, getDataFromStorage} from "../Api/storage";
 
 const style = {
   wrapper: {
@@ -27,6 +27,18 @@ class App extends Component {
     this.state = {
       hashtags: []
     };
+  }
+
+  componentDidMount() {
+    getDataFromStorage()
+        .then((result, reject) => {
+          console.log(result);
+          console.log(reject);
+          if (result) {
+            this.setState({ hashtags:  result});
+          }
+        })
+        .catch(e => console.log(e));
   }
 
   addHashtagHandler = (value) => {

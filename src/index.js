@@ -18,5 +18,5 @@ getDataFromStorage()
     })
     .catch(e => console.log(e));
 
-updateDataInStorage([{key: 1, name: 'React' + ~~(Math.random()*10)}, {key: 2, name: 'Redux'}]);
+updateDataInStorage([{key: 1, label: 'React'}, {key: 2, label: 'Redux'}]);
 */
