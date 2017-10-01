@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import Save from 'material-ui/svg-icons/content/save';
+import SaveIcon from 'material-ui/svg-icons/content/save';
 
 const style = {
   border: '2px solid black',
@@ -16,7 +16,7 @@ class SaveButton extends Component {
         style={style}
         label="Save"
         labelPosition="after"
-        icon={<Save />}
+        icon={<SaveIcon />}
         onClick={this.props.saveTags}
       />
     );

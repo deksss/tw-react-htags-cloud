@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import {sereachTweets} from "../Api/twitter";
+import SearchIcon from 'material-ui/svg-icons/action/search';
 
 const style = {
   border: '2px solid black',
@@ -8,6 +9,8 @@ const style = {
   paddingLeft: 10,
   paddingRight: 10,
   color: 'black',
+  display: 'flex',
+  alignItems: 'center'
 }
 
 class SearchInput extends Component {
@@ -46,6 +49,7 @@ class SearchInput extends Component {
           searchText={this.state.value}
           onNewRequest={this.handleNewRequest}
         />
+        <SearchIcon color={'grey'} />
       </div>
     );
   }

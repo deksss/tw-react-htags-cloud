@@ -1,25 +1,18 @@
 import React, { Component } from "react";
 import Chip from 'material-ui/Chip';
 
-/**
- * An example of rendering multiple Chips from an array of values. Deleting a chip removes it from the array.
- * Note that since no `onClick` property is defined, the Chip can be focused, but does not gain depth
- * while clicked or touched.
- */
 class TagsCloud extends Component {
   constructor(props) {
     super(props);
     this.state = {chipData: [
-      {key: 0, label: 'Some'},
-      {key: 1, label: 'Body'},
-      {key: 2, label: 'One'},
-      {key: 3, label: 'Told'},
-      {key: 4, label: 'Me'},
     ]};
     this.styles = {
       chip: {
         margin: 4,
         minHeight: '',
+        borderColor: 'black',
+        borderWidth: 2,
+        borderStyle: 'solid',
       },
       wrapper: {
         display: 'flex',
