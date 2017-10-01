@@ -13,6 +13,24 @@ const tw = new Twitter(
   accessTokenSecret
 );
 
+const sereachCashe = {};
+const invalidateCasheTime  = 60000;
+
+const pushToCashe = (query, tagsArr) => sereachCashe[query] =
+  {
+    tags: tagsArr,
+    date: new Date()
+  };
+
+const getFromCashe = (query) => {
+  const cashed = sereachCashe[query];
+  const isValid = cashed && (new Date() - cashed.date) < invalidateCasheTime;
+  if (isValid) {
+    return cashed.tags;
+  }
+  return false
+}
+
 
 export const getUniqHtags = (twitts, rawQueryString) => {
   const query = rawQueryString.toLowerCase();
@@ -35,14 +53,26 @@ export const getUniqHtags = (twitts, rawQueryString) => {
 
 export const sereachTweets = query => {
    const  url = 'https://api.twitter.com/1.1/search/tweets.json';
-   return tw.get(url, {q: query});
-   /*
-   tw.get(url, {q: query})
-     .then((resolve, reject) => {
-       console.log(reject);
-       const htags = getUniqHtags(resolve, query);
-       console.log(htags);
+
+   return new Promise((resolve, reject) => {
+     const resultFromCash = getFromCashe(query);
+
+     if (resultFromCash) {
+       console.log('gettted from cash');
+       resolve(resultFromCash);
+     } else {
+       console.log('try to get htags from api');
+       tw.get(url, {q: query})
+        .then((rs, rj) => {
+          if (rs) {
+            const htags = getUniqHtags(rs, query);
+            pushToCashe(query, htags);
+            resolve(htags);
+          } else if (rj) {
+            reject(rj);
+          }
+        })
+        .catch(e => reject(e));
      }
-    );
-    */
+   })
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
-import {sereachTweets, getUniqHtags} from "../Api/twitter";
+import {sereachTweets} from "../Api/twitter";
 
 const style = {
   border: '2px solid black',
@@ -12,9 +12,11 @@ const style = {
 class SearchInput extends Component {
   state = {
     dataSource: [],
+    value: ''
   };
 
   handleUpdateInput = (value) => {
+    /*
     sereachTweets(value).then((resolve, reject) => {
       console.log(reject);
       console.log(resolve);
@@ -25,16 +27,27 @@ class SearchInput extends Component {
       });
     }
    );
+   */
+    if (value && value !== this.state.value) {
+      sereachTweets(value).then((resolve, reject) => {
+        this.setState({
+          dataSource: resolve,
+          value: value
+        });
+      })
+    }
+
   };
 
   render() {
     return (
       <div style={style}>
         <AutoComplete
-          hintText="Type hashtag"
+          hintText="Hashtag"
           dataSource={this.state.dataSource}
           onUpdateInput={this.handleUpdateInput}
           fullWidth={true}
+          onNewRequest={e => this.setState({value: e}) }
         />
       </div>
     );
